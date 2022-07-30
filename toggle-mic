@@ -1,0 +1,10 @@
+#!/bin/sh
+
+MUTED=$(pactl get-source-mute 49)
+
+
+if [[ $MUTED == "Mute: yes" ]]; then
+  echo -e "  " # Muted Icon (Install Some icon pack like feather, nerd-fonts)
+else
+  echo -e "  " # Unmuted Icon (Install Some icon pack like feather, nerd-fonts)
+fi

@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Audio sinks
+HEADSET='alsa_output.usb-C-Media_Electronics_Inc._Redragon_Gaming_Headset-00.analog-stereo'
+SPEAKERS='alsa_output.pci-0000_00_1b.0.hdmi-stereo'
+CHANGEHEADSET='Headset'
+CHANGESPEAKER='Speakers'
+
+
+# Get current audio sink
+CURRENTDEV=$(pactl list short sinks | grep RUNNING | awk {'print $2'})
+
+# Determine our next audio sink
+if [[ "$CURRENTDEV" == "$HEADSET" ]]; then
+    NEXTDEV=$SPEAKERS
+	CHANGETO=$CHANGESPEAKER
+	notify-send 'Audio device changed to '$CHANGETO -u normal -i audio-speakers-symbolic
+else
+    NEXTDEV=$HEADSET
+	CHANGETO=$CHANGEHEADSET
+	notify-send 'Audio device changed to '$CHANGETO -u normal -i audio-headphones-symbolic
+fi
+
+# Set our default device
+pactl set-default-sink $NEXTDEV
+
+# Notify that audio device have changed
+# notify-send 'Audio device changed to '$CHANGETO -u normal -i
+
+# Move current streams (dont check for null, if null you wont see heads up display of audio change)
+INPUTS=($(pacmd list-sink-inputs | grep index | awk '{print $2}'))
+for i in ${INPUTS[*]}; do pacmd move-sink-input $i $NEXTDEV &> /dev/null; done
