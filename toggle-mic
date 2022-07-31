@@ -1,10 +1,10 @@
 #!/bin/sh
 
 MUTED=$(pactl get-source-mute 49)
-
+VOLUME=$(pactl get-source-volume 49 | awk '{ print substr ($0, 23 ) }' | awk '{ print substr ($0, 1, length($0) -10 )}')
 
 if [[ $MUTED == "Mute: yes" ]]; then
-  echo -e "  " # Muted Icon (Install Some icon pack like feather, nerd-fonts)
+  echo -e "%{F#6a6b6b}   $VOLUME%{F-}" # Muted
 else
-  echo -e "  " # Unmuted Icon (Install Some icon pack like feather, nerd-fonts)
+  echo -e "   $VOLUME" # Unmuted
 fi
