@@ -1,7 +1,8 @@
 #!/bin/sh
 
-MUTED=$(pactl get-source-mute 49)
-VOLUME=$(pactl get-source-volume 49 | awk {'print $5'})
+DEVICE="alsa_input.usb-C-Media_Electronics_Inc._Redragon_Gaming_Headset-00.mono-fallback"
+MUTED=$(pactl get-source-mute $DEVICE)
+VOLUME=$(pactl get-source-volume $DEVICE | awk {'print $5'})
 
 if [[ $MUTED == "Mute: yes" ]]; then
   echo -e "%{F#6a6b6b}   $VOLUME%{F-}" # Muted
