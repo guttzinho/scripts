@@ -1,7 +1,0 @@
-#!/bin/zsh
-
-if [ ! $(pgrep "spotifyd") ]; then
-  spotifyd
-fi
-
-spt
