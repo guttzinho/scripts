@@ -21,6 +21,6 @@ fi
 pactl set-default-sink $NEXTDEV
 
 
-# Move current streams (dont check for null, if null you wont see heads up display of audio change)
+# Move current streams
 INPUTS=($(pacmd list-sink-inputs | grep index | awk '{print $2}'))
 for i in ${INPUTS[*]}; do pacmd move-sink-input $i $NEXTDEV &> /dev/null; done
