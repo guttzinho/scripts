@@ -13,7 +13,7 @@ storm=" "
 lightning=" "
 unknown=" "
 
-location="RioVerde"
+location="RioVerdeGO"
 errorWait=( 5 15 60 150 300 )
 maxErrors=${#errorWait[@]}
 
