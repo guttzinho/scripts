@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DEVICE="alsa_input.usb-C-Media_Electronics_Inc._Redragon_Gaming_Headset-00.mono-fallback"
+DEVICE="alsa_input.usb-C-Media_Electronics_Inc._Redragon_Gaming_Headset-00.9.mono-fallback"
 MUTED=$(pactl get-source-mute $DEVICE)
 VOLUME=$(pactl get-source-volume $DEVICE | awk {'print $5'})
 
