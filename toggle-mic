@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DEVICE="alsa_input.usb-C-Media_Electronics_Inc._Redragon_Gaming_Headset-00.9.mono-fallback"
+DEVICE=$(pactl list sources short | grep Redragon | awk {'print $2'} | grep input)
 MUTED=$(pactl get-source-mute $DEVICE)
 VOLUME=$(pactl get-source-volume $DEVICE | awk {'print $5'})
 
