@@ -4,10 +4,10 @@ MUTED=$(pamixer --get-mute)
 
 if [[ $MUTED == "false" ]]; then
 	pamixer --mute
-	notify-send "Audio muted" -i audio-volume-muted-symbolic
+	notify-send "Audio muted" -i audio-volume-muted-symbolic -t 400
 fi
 
 if [[ $MUTED == "true" ]]; then
     pamixer --unmute
-    notify-send "Audio unmuted" -i audio-speakers-symbolic
+    notify-send "Audio unmuted" -i audio-speakers-symbolic -t 400
 fi

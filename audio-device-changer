@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Audio sinks
-HEADSET='alsa_output.usb-C-Media_Electronics_Inc._Redragon_Gaming_Headset-00.9.analog-stereo'
-SPEAKERS='alsa_output.pci-0000_04_00.6.9.analog-stereo'
+HEADSET=$(pactl list sinks | grep "alsa_output.usb-C-Media_Electronics_Inc._Redragon_Gaming_Headset-00" | awk {'print $2'} | grep alsa)
+SPEAKERS=$(pactl list sinks | grep alsa_output.pci | awk {'print $2'} | grep alsa)
 
 
 # Get current audio sink
@@ -21,6 +21,6 @@ fi
 pactl set-default-sink $NEXTDEV
 
 
-# Move current streams
+# Move current streams (dont check for null, if null you wont see heads up display of audio change)
 INPUTS=($(pacmd list-sink-inputs | grep index | awk '{print $2}'))
 for i in ${INPUTS[*]}; do pacmd move-sink-input $i $NEXTDEV &> /dev/null; done
