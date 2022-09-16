@@ -3,4 +3,6 @@
 HEADSET=$(pactl list sinks | grep "alsa_output.usb-C-Media_Electronics_Inc._Redragon_Gaming_Headset-00" | awk {'print $2'} |	grep alsa)
 SPEAKERS=$(pactl list sinks | grep alsa_output.pci | awk {'print $2'} | grep alsa)
 
-exec pulseaudio-control --format '$VOL_ICON ${VOL_LEVEL}% $ICON_NODE $NODE_NICKNAME' --icons-volume " , " --icon-muted "" --node-nicknames-from "device.description" --node-nickname "$SPEAKERS:蓼" --node-nickname "$HEADSET: " listen
+# $VOL_ICON
+
+exec pulseaudio-control --format '$ICON_NODE $NODE_NICKNAME ${VOL_LEVEL}%' --icons-volume " , " --icon-muted "" --node-nicknames-from "device.description" --node-nickname "$SPEAKERS:蓼" --node-nickname "$HEADSET: " listen
