@@ -1,0 +1,26 @@
+#!/bin/sh
+
+HEADSET=$(pactl list sinks | grep "alsa_output.usb-C-Media_Electronics_Inc._Redragon_Gaming_Headset-00" | awk {'print $2'} |    grep alsa)
+SPEAKERS=$(pactl list sinks | grep alsa_output.pci | awk {'print $2'} | grep alsa)
+
+if [[ $(pactl get-default-sink) == "$HEADSET" ]]; then
+	MUTED=$(pactl get-sink-mute $HEADSET)
+	VOLUME=$(pactl get-sink-volume $HEADSET | awk {'print $5'})
+	if [[ $MUTED == "Mute: yes" ]]; then
+		echo -e "ﳌ" # muted
+	else
+		echo -e "$VOLUME" # unmuted
+	fi
+fi
+
+if [[ $(pactl get-default-sink) == "$SPEAKERS" ]]; then
+    MUTED=$(pactl get-sink-mute $SPEAKERS)
+    VOLUME=$(pactl get-sink-volume $SPEAKERS | awk {'print $5'})
+    if [[ $MUTED == "Mute: yes" ]]; then
+        echo -e "遼" # muted
+    else
+        echo -e "蓼$VOLUME" # unmuted
+    fi
+fi
+
+

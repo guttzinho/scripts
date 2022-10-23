@@ -5,7 +5,7 @@ MUTED=$(pactl get-source-mute $DEVICE)
 VOLUME=$(pactl get-source-volume $DEVICE | awk {'print $5'})
 
 if [[ $MUTED == "Mute: yes" ]]; then
-  echo -e "%{F#6a6b6b} $VOLUME%{F-}" # Muted
+  echo -e "" # Muted
 else
   echo -e " $VOLUME" # Unmuted
 fi
